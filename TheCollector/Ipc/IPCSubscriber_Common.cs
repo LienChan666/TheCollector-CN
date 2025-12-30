@@ -28,7 +28,7 @@ public class IPCSubscriber_Common
             }
             catch (Exception ex)
             {
-                Svc.Log.Debug($"Error while unregistering IPC: {ex}");
+                Svc.Log.Debug($"注销 IPC 时出错：{ex}");
             }
     }
 }

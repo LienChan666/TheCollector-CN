@@ -81,7 +81,7 @@ public unsafe class ScripShopWindowHandler
         if (!GenericHelpers.TryGetAddonByName("InclusionShop", out AtkUnitBase* addon) || addon == null)
         {
             ResetForceSearch();
-            return StepResult.Fail("InclusionShop not open");
+            return StepResult.Fail("工票商店未打开");
         }
 
         if (!_forceSearchActive || _targetItemId != itemId || _targetAmount != amount)
@@ -107,14 +107,14 @@ public unsafe class ScripShopWindowHandler
         if (_forceSubPageMax == 0 && !TryGetDropdownList(addon, out _forceSubPageMax))
         {
             ResetForceSearch();
-            return StepResult.Fail("Could not read subpage dropdown");
+            return StepResult.Fail("无法读取子页面下拉列表");
         }
 
         if (_forceSubPage > _forceSubPageMax)
         {
             var id = _targetItemId;
             ResetForceSearch();
-            return StepResult.Fail($"Item {id} not found in any subpage");
+            return StepResult.Fail($"未在任何子页面找到物品 {id}");
         }
 
         if (!_waitingForTabChange)
@@ -191,7 +191,7 @@ public unsafe class ScripShopWindowHandler
         {
             if (shopItems[i].ItemId == itemId)
             {
-                _log.Debug($"Index: {index}");
+                _log.Debug($"索引：{index}");
                 index = i;
                 break;
             }

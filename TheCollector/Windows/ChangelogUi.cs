@@ -15,7 +15,7 @@ public class ChangelogUi : IUiService
     {
         _log = log;
         _config = config;
-        Changelog = new Changelog("TheCollector Changelog", ConfigData , Save );
+        Changelog = new Changelog("TheCollector 更新日志", ConfigData , Save );
         Add0_28(Changelog);
         Add0_29(Changelog);
         Add0_30(Changelog);
@@ -37,87 +37,87 @@ public class ChangelogUi : IUiService
 
     private void Add_0_4_6(Changelog changeLog)
     {
-        changeLog.NextVersion("Version 0.4.6")
-            .RegisterEntry("Updated logic for reading scrip amount, fixing various issues");
+        changeLog.NextVersion("版本 0.4.6")
+            .RegisterEntry("更新读取工票数量的逻辑，修复若干问题");
     }
 
     private void Add_0_4_5(Changelog log)
     {
-        log.NextVersion("Version 0.4.5")
-            .RegisterEntry("Bandaid fix for cases where the user has missing scripshop subpages and it cant find the item - now forces through every sub page trying to find the item");
+        log.NextVersion("版本 0.4.5")
+            .RegisterEntry("针对未解锁工票商店子页面导致无法找到物品的情况做了临时修复——现在会强制遍历所有子页面寻找物品");
     }
     private void Add_0_4_4(Changelog log)
     {
-        log.NextVersion("0.4.4")
-            .RegisterEntry("Now matches scripshopitems with ItemIds instead of strings, supporting more languages than english (You might have to re-add your items to purchase for them to show up properly)");
+        log.NextVersion("版本 0.4.4")
+            .RegisterEntry("工票商店物品现在按 ItemId 匹配而非字符串，支持更多语言（可能需要重新添加要购买的物品以正确显示）");
     }
     private void Add0_40(Changelog changelog)
     {
-        changelog.NextVersion("Version 0.40")
-                 .RegisterEntry("The plugin will now turn in any remaining collectables after finishing scrip shop purchases")
-                 .RegisterEntry("Collectable turn-in will now abort early if you're hitting scrip cap again as well");
+        changelog.NextVersion("版本 0.40")
+                 .RegisterEntry("完成工票购买后，插件会交纳剩余的收藏品")
+                 .RegisterEntry("如果再次触及工票上限，收藏品交纳会提前停止");
     }
 
     public static void Add0_39(Changelog log) =>
-        log.NextVersion("Version 0.39")
-           .RegisterHighlight("Re-enabled functionality")
-           .RegisterHighlight("Merged ArtisanBuddy functionality into TheCollector, adding the ability to craft a selected artisan list after autogather disables")
-           .RegisterEntry("Removed the feature to enable auto collectable turn-in after autogather disables");
+        log.NextVersion("版本 0.39")
+           .RegisterHighlight("功能已重新启用")
+           .RegisterHighlight("将 ArtisanBuddy 功能合并到 TheCollector：自动采集结束后可制作指定的 Artisan 列表")
+           .RegisterEntry("移除了“自动采集结束后自动交纳收藏品”的功能");
     public static void Add0_38(Changelog log) =>
-        log.NextVersion("Version 0.38")
+        log.NextVersion("版本 0.38")
            .RegisterImportant(
-               "With the most recent testing build of GatherBuddyReborn, it has implemented the feature to automatically turn-in collectables and also handle scripshop purchases.\n For the time being I'm going disable the functionality of this Plugin till the next version, where I will cut out all the gatherable collectable stuff so it'll be crafting only.\n This should be out in the next couple of days, a big thank you to anyone using the plugin and those who decided to support!♡");
+               "在 GatherBuddyReborn 最新测试版中已实现自动交纳收藏品及工票购买功能。\n因此我会暂时禁用本插件的相关功能，直到下个版本（届时将移除采集相关收藏品功能，仅保留制作）。\n预计几天内发布，感谢所有使用和支持插件的人！♡");
 
     public static void Add0_37(Changelog log) =>
-        log.NextVersion("Version 0.37")
-           .RegisterImportant("If you had your shop preferred shop set to Gridania, please select something else and then re-select Gridania for everything to work correctly, thank you!")
-           .RegisterEntry("Now properly checks if you can actually teleport when artisan is done crafting a list")
-           .RegisterEntry("Fixed a bug where it wouldn't teleport when you're in a housing ward")
+        log.NextVersion("版本 0.37")
+           .RegisterImportant("如果你的首选商店设置为格里达尼亚旧街，请先选择其他地点再重新选择格里达尼亚旧街，以确保正常工作，谢谢！")
+           .RegisterEntry("现在在 Artisan 制作列表结束时会正确检查是否可传送")
+           .RegisterEntry("修复在住宅区内不会传送的问题")
            .RegisterEntry(
-               "Now moves to the shop instead of teleporting if you're in the same territory and are somewhat nearby");
+               "如果位于同一地区且距离不远，将改为直接移动而非传送");
     public static void Add0_36(Changelog log) =>
-        log.NextVersion("Version 0.36")
-           .RegisterHighlight("Added failsafe for buying scrip items so it wont buy the wrong shop item anymore if it cant find the selected one in the shop tab")
-           .RegisterEntry("Made it fetch the data for the scrip shop items from the git repo instead of locally, allowing for edits without having to actually update the plugin");
+        log.NextVersion("版本 0.36")
+           .RegisterHighlight("为工票购买增加保险措施：当在商店页签中找不到所选物品时，不再购买错误物品")
+           .RegisterEntry("工票商店物品数据改为从 Git 仓库拉取，无需更新插件即可调整");
     public static void Add0_35(Changelog log) =>
-        log.NextVersion("Version 0.35")
-           .RegisterHighlight("Added Mason's Abrasive and fixed a few items indices");
+        log.NextVersion("版本 0.35")
+           .RegisterHighlight("新增石匠研磨剂并修复部分物品索引");
     public static void Add0_34(Changelog log) =>
-        log.NextVersion("Version 0.34")
+        log.NextVersion("版本 0.34")
            .RegisterHighlight(
-               "!!!IMPORTANT!!! If your crafter or gatherer is high enough level but you haven’t unlocked the corresponding Scrip Exchange tab (e.g. “Purple Scrip Exchange – Lv. 80 Materials/Bait/Tokens”), the plugin may purchase the wrong item.\nUnlock the relevant Splendors vendor tabs before setting higher-level items.")
-           .RegisterEntry("Fixed collectable sorting in your inventory completely now");
+               "！！！重要！！！如果你的采集/制作等级足够，但尚未解锁对应的工票兑换页（例如“紫票兑换 - 80级 材料/鱼饵/代币”），插件可能会购买错误物品。\n请先在收藏品/工票NPC处解锁相应页签，再设置高等级物品。")
+           .RegisterEntry("已完全修复背包中收藏品排序问题");
     public static void Add0_33(Changelog log) =>
-        log.NextVersion("Version 0.33")
+        log.NextVersion("版本 0.33")
            .RegisterEntry(
-               "Filtered 'Gazelle Leather' out of the list of collectables in your inventory since Luminas IsCollectable flag returns true for it for some reason???");
+               "由于 Lumina 的 IsCollectable 标记错误地把“瞪羚革”识别为收藏品，现在已将其从列表中过滤。");
     public static void Add0_32(Changelog log) =>
-        log.NextVersion("Version 0.32")
+        log.NextVersion("版本 0.32")
            .RegisterEntry(
-               "Increased timeout on turning in collectables, which should enable full inventory turn-ins now")
-           .RegisterEntry("Fixed bought items not adding up anymore");
+               "延长交纳收藏品的超时时间，现在应可完成整包交纳")
+           .RegisterEntry("修复已购数量不正确的问题");
     public static void Add0_31(Changelog log) =>
-        log.NextVersion("Version 0.31")
-           .RegisterHighlight("Added Lifestream integration and with that new CollectableShop locations Solution Nine and Gridania")
-           .RegisterEntry("Further improved automation");
+        log.NextVersion("版本 0.31")
+           .RegisterHighlight("新增 Lifestream 联动，并新增收藏品地点：九号解决方案与格里达尼亚旧街")
+           .RegisterEntry("进一步优化自动化流程");
     public static void Add0_30(Changelog log) =>
-        log.NextVersion("Version 0.30")
-           .RegisterHighlight("Added new scripshopitem Levinchrome Aethersand!")
-           .RegisterEntry("Fixed scripshopautomation breaking. Sorry!");
+        log.NextVersion("版本 0.30")
+           .RegisterHighlight("新增工票商店物品紫电灵砂！")
+           .RegisterEntry("修复工票商店自动化失效的问题，抱歉！");
     
     public static void Add0_29(Changelog log) =>
-        log.NextVersion("Version 0.29")
-           .RegisterHighlight("Refactored the whole automation handling")
-           .RegisterHighlight("Added /collector stop command to stop automation as well as a window with a stop button that appears when automation is running")
-           .RegisterHighlight("Added new config option to start collecting once you finish fishing")
-           .RegisterEntry("Exposed a few functions via EzIPC");
+        log.NextVersion("版本 0.29")
+           .RegisterHighlight("重构了整个自动化流程")
+           .RegisterHighlight("新增 /collector stop 命令用于停止自动化，并在自动化运行时显示带停止按钮的窗口")
+           .RegisterHighlight("新增配置项：钓鱼结束后自动开始交纳收藏品")
+           .RegisterEntry("通过 EzIPC 暴露了部分功能");
     
     private static void Add0_28(Changelog log)=>
-        log.NextVersion("Version 0.28")
-           .RegisterHighlight("Added changelog window!")
-           .RegisterEntry("Marked Solution nine teleport as not functional & made it not interactable and also set the Eulmore one as default")
-           .RegisterEntry("Fixed a bug where it would fail to buy items if the quantity was set too high")
-           .RegisterEntry("Made certain config settings not interactable if the required plugins are not installed");
+        log.NextVersion("版本 0.28")
+           .RegisterHighlight("新增更新日志窗口！")
+           .RegisterEntry("将九号解决方案的传送标记为不可用并禁用交互，同时将游末邦设为默认")
+           .RegisterEntry("修复当数量设置过高时无法购买的问题")
+           .RegisterEntry("当必需插件未安装时，相关设置将不可操作");
     
     private (int, ChangeLogDisplayType) ConfigData()
         => (_config.LastSeenVersion, _config.ChangeLogDisplayType);

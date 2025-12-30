@@ -14,7 +14,7 @@ public class StopUi : Window, IDisposable
     private readonly CollectableAutomationHandler _collectableHandler;
 
     public StopUi(AutomationHandler automation, CollectableAutomationHandler collectableHandler)
-        : base("The Collector##CollectorStop",
+        : base("收藏品助手##CollectorStop",
                ImGuiWindowFlags.NoScrollbar
                | ImGuiWindowFlags.NoScrollWithMouse
                | ImGuiWindowFlags.NoResize
@@ -56,8 +56,8 @@ public class StopUi : Window, IDisposable
 
     private void DrawStopButton()
     {
-        if (ImGui.Button("Stop", new Vector2(ImGui.GetContentRegionAvail().X, 100)))
-            _automation?.ForceStop("Stopped by user");
+        if (ImGui.Button("停止", new Vector2(ImGui.GetContentRegionAvail().X, 100)))
+            _automation?.ForceStop("已由用户停止");
 
     }
     private void DrawStatusInfo()
@@ -65,16 +65,16 @@ public class StopUi : Window, IDisposable
         switch (Plugin.State)
         {
             case PluginState.Idle:
-                ImGui.TextUnformatted("Idle...");
+                ImGui.TextUnformatted("空闲中...");
                 break;
             case PluginState.Teleporting:
-                ImGui.TextUnformatted("Teleporting...");
+                ImGui.TextUnformatted("传送中...");
                 break;
             case PluginState.MovingToCollectableVendor:
-                ImGui.TextUnformatted("Moving to vendor...");
+                ImGui.TextUnformatted("前往兑换员...");
                 break;
             case PluginState.ExchangingItems:
-                ImGui.TextUnformatted("Turning in items:");
+                ImGui.TextUnformatted("正在交纳物品：");
                 if (_collectableHandler.TurnInQueue.Length != 0)
                 {
                     for (int i = 0; i < _collectableHandler.TurnInQueue.Length; i++)
@@ -83,7 +83,7 @@ public class StopUi : Window, IDisposable
                         if (_collectableHandler.CurrentItemName is not null && _collectableHandler.CurrentItemName == item.name)
                         {
                             ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(0f, 1f, 0f, 1f)); //green
-                            ImGui.TextUnformatted("Current item: ");
+                            ImGui.TextUnformatted("当前物品：");
                             ImGui.PopStyleColor();
                             ImGui.SameLine();
 
@@ -94,7 +94,7 @@ public class StopUi : Window, IDisposable
                 }
                 break;
             case PluginState.SpendingScrip:
-                ImGui.TextUnformatted("Spending scrip...");
+                ImGui.TextUnformatted("正在使用工票...");
                 break;
         }
     }

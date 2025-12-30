@@ -70,7 +70,7 @@ public sealed class FrameRunner
         Next();
     }
 
-    public void Cancel(string reason = "Canceled")
+    public void Cancel(string reason = "已取消")
     {
         if (!_running) return;
         _cancel = true;
@@ -96,7 +96,7 @@ public sealed class FrameRunner
 
         if (_cur.Timeout > TimeSpan.Zero && DateTime.UtcNow - _started > _cur.Timeout)
         {
-            _onDone(_cur.Name, StepStatus.Failed, "Timeout");
+            _onDone(_cur.Name, StepStatus.Failed, "超时");
             Next();
             return;
         }

@@ -126,7 +126,7 @@ public class AutomationHandler : IDisposable
 
     private void OnError(string reason)
     {
-        _chatGui.Print($"Automation threw an error, {reason}", "TheCollector");
+        _chatGui.Print($"发生错误：{reason}", "TheCollector"); 
     }
     private void OnScripCapped(bool capped)
     {
@@ -145,7 +145,7 @@ public class AutomationHandler : IDisposable
         for (int i = 0; i < items.Count; i++)
             items[i].AmountPurchased = 0;
         _config.Save();
-        _log.Debug("Reset all quantities since the list is complete.");
+        _log.Debug("列表已完成，已重置所有数量。");
         return true;
     }
 

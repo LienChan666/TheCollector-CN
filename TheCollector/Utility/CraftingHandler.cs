@@ -75,7 +75,7 @@ public class CraftingHandler : IDisposable
         }
         else
         {
-            _log.Debug("Player is not available for crafting.");
+            _log.Debug("当前无法进行制作。");
         }
 
 
@@ -93,7 +93,7 @@ public class CraftingHandler : IDisposable
     public void Invoke()
     {
         Chat.ExecuteCommand($"/artisan lists {_configuration.ArtisanListId} start");
-        _log.Debug("Artisan.Invoke");
+        _log.Debug("Artisan 调用");
     }
 
     private void TeleportToSafeArea()
@@ -104,11 +104,11 @@ public class CraftingHandler : IDisposable
         if (TeleportHelper.TryFindAetheryteByName(nearestAetheryte, out var info, out var aetherName))
         {
             TeleportHelper.Teleport(info.AetheryteId, info.SubIndex);
-            _log.Debug($"Teleporting to {aetherName}...");
+            _log.Debug($"正在传送到 {aetherName}...");
         }
         else
         {
-            _log.Error("Failed to find teleport location.");
+            _log.Error("未找到传送地点。");
         }
     }
 }

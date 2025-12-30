@@ -28,7 +28,7 @@ public class ConfigWindow : Window, IDisposable
     private readonly CollectableAutomationHandler _collectableHandler;
     
     public ConfigWindow(Plugin plugin, IDataManager data, ITargetManager target, ScripShopAutomationHandler scripShop, CollectableAutomationHandler collectableAutomationHandler)
-        : base("Configuration###CollectorConfig")
+        : base("设置###CollectorConfig")
     {
         Flags = ImGuiWindowFlags.NoCollapse
                 | ImGuiWindowFlags.NoScrollbar
@@ -68,14 +68,14 @@ public class ConfigWindow : Window, IDisposable
     {
         ImGuiHelper.Panel("InstalledPlgs", () =>
         {
-            ImGui.TextUnformatted("Installed required/optional Plugins:");
+            ImGui.TextUnformatted("已安装的必需/可选插件：");
 
             ImGui.Spacing();
             ImGui.PushStyleColor(ImGuiCol.Text,
                                  IPCSubscriber_Common.IsReady("vnavmesh")
                                      ? new Vector4(0, 1, 0, 1)
                                      : new Vector4(1, 0, 0, 1));
-            ImGui.TextUnformatted("vnavmesh(required)");
+            ImGui.TextUnformatted("vnavmesh（必需）");
             ImGui.PopStyleColor();
             ImGui.Spacing();
 
@@ -83,7 +83,7 @@ public class ConfigWindow : Window, IDisposable
                                  IPCSubscriber_Common.IsReady("GatherbuddyReborn")
                                      ? new Vector4(0, 1, 0, 1)
                                      : new Vector4(1, 0, 0, 1));
-            ImGui.TextUnformatted("GatherbuddyReborn(optional)");
+            ImGui.TextUnformatted("GatherbuddyReborn（可选）");
             ImGui.PopStyleColor();
             ImGui.Spacing();
 
@@ -91,7 +91,7 @@ public class ConfigWindow : Window, IDisposable
                                  IPCSubscriber_Common.IsReady("Artisan")
                                      ? new Vector4(0, 1, 0, 1)
                                      : new Vector4(1, 0, 0, 1));
-            ImGui.TextUnformatted("Artisan(optional)");
+            ImGui.TextUnformatted("Artisan（可选）");
             ImGui.PopStyleColor();
             ImGui.Spacing();
             
@@ -99,7 +99,7 @@ public class ConfigWindow : Window, IDisposable
                                  IPCSubscriber_Common.IsReady("Lifestream")
                                      ? new Vector4(0, 1, 0, 1)
                                      : new Vector4(1, 0, 0, 1));
-            ImGui.TextUnformatted("Lifestream(optional)");
+            ImGui.TextUnformatted("Lifestream（可选）");
             ImGui.PopStyleColor();
             ImGui.Spacing();
         });
@@ -111,12 +111,12 @@ public class ConfigWindow : Window, IDisposable
         ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.30f, 0.70f, 0.96f, 1.00f)); 
         ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.10f, 0.50f, 0.76f, 1.00f));  
 
-        float buttonWidth = ImGui.CalcTextSize("Support Me").X + ImGui.GetStyle().FramePadding.X * 2;
+        float buttonWidth = ImGui.CalcTextSize("支持我").X + ImGui.GetStyle().FramePadding.X * 2;
         float windowWidth = ImGui.GetWindowContentRegionMax().X;
         float cursorX = windowWidth - buttonWidth;
 
         ImGui.SetCursorPosX(cursorX);
-        if (ImGui.Button("Support Me"))
+        if (ImGui.Button("支持我"))
         {
             Process.Start(new ProcessStartInfo
             {
@@ -134,21 +134,21 @@ public class ConfigWindow : Window, IDisposable
         ImGuiHelper.Panel("Options", () =>
         {
             ImGui.BeginDisabled(!IPCSubscriber_Common.IsReady("vnavmesh"));
-            ImGui.TextUnformatted("Options:");
+            ImGui.TextUnformatted("选项：");
             if (ImGui.CollapsingHeader("Artisan"))
             {
                 
             ImGui.BeginDisabled(!IPCSubscriber_Common.IsReady("GatherbuddyReborn") || !IPCSubscriber_Common.IsReady("Artisan"));
 
             var craftOnAutogatherDisabled = Configuration.ShouldCraftOnAutogatherChanged;
-            if (ImGui.Checkbox("Craft selected Artisan list id on autogather finish", ref craftOnAutogatherDisabled))
+            if (ImGui.Checkbox("自动采集结束后制作所选 Artisan 列表", ref craftOnAutogatherDisabled))
             {
                 Configuration.ShouldCraftOnAutogatherChanged = craftOnAutogatherDisabled;
                 Configuration.Save();
             }
             ImGui.BeginDisabled(!craftOnAutogatherDisabled);
             var listId = Configuration.ArtisanListId;
-            ImGui.Text("Artisan List ID:");
+            ImGui.Text("Artisan 清单 ID：");
             if (ImGui.InputInt("##ArtisanListID", ref listId, 100))
             {
                 Configuration.ArtisanListId = listId;
@@ -156,7 +156,7 @@ public class ConfigWindow : Window, IDisposable
             }
 
             var toggleCollectOnFinishCraftingList = Configuration.CollectOnFinishCraftingList;
-            if (ImGui.Checkbox("Collect on Finish Crafting an Artisan List", ref toggleCollectOnFinishCraftingList))
+            if (ImGui.Checkbox("完成 Artisan 清单制作后开始交纳收藏品", ref toggleCollectOnFinishCraftingList))
             {
                 Configuration.CollectOnFinishCraftingList = toggleCollectOnFinishCraftingList;
                 Configuration.Save();
@@ -165,11 +165,11 @@ public class ConfigWindow : Window, IDisposable
             ImGui.EndDisabled();
             ImGui.EndDisabled();
             }
-            if (ImGui.CollapsingHeader("Misc"))
+            if (ImGui.CollapsingHeader("杂项"))
             {
             ImGui.BeginDisabled(!IPCSubscriber_Common.IsReady("GatherbuddyReborn"));
             var toggleAutogatherOnFinish = Configuration.EnableAutogatherOnFinish;
-            if (ImGui.Checkbox("Enable Autogather on finish collecting", ref toggleAutogatherOnFinish))
+            if (ImGui.Checkbox("交纳完成后启用自动采集", ref toggleAutogatherOnFinish))
             {
                 Configuration.EnableAutogatherOnFinish = toggleAutogatherOnFinish;
                 Configuration.Save();
@@ -179,31 +179,31 @@ public class ConfigWindow : Window, IDisposable
 
 
             var buyAfterEachCollect = Configuration.BuyAfterEachCollect;
-            if (ImGui.Checkbox("Buy items after each trade instead of on capping scrips", ref buyAfterEachCollect))
+            if (ImGui.Checkbox("每次交纳后购买物品（而非工票满时）", ref buyAfterEachCollect))
             {
                 Configuration.BuyAfterEachCollect = buyAfterEachCollect;
                 Configuration.Save();
             }
 
             var resetEachQuantityAfterCompletingList = Configuration.ResetEachQuantityAfterCompletingList;
-            if (ImGui.Checkbox("Reset each quantity after completing the list",
-                               ref resetEachQuantityAfterCompletingList))
+            if (ImGui.Checkbox("列表完成后重置各物品数量", 
+                               ref resetEachQuantityAfterCompletingList))       
             {
                 Configuration.ResetEachQuantityAfterCompletingList = resetEachQuantityAfterCompletingList;
                 Configuration.Save();
             }
 
             var invokeAfterFinishFishing = Configuration.CollectOnFinishedFishing;
-            if (ImGui.Checkbox("Collect on Finished Fishing", ref invokeAfterFinishFishing))
+            if (ImGui.Checkbox("钓鱼完成后开始交纳收藏品", ref invokeAfterFinishFishing))
             {
                 Configuration.CollectOnFinishedFishing = invokeAfterFinishFishing;
                 Configuration.Save();
             }
             }
-            ImGui.TextUnformatted("Select your preferred collectable shop:");
+            ImGui.TextUnformatted("选择首选的收藏品兑换地点：");
             ImGui.SameLine();
 
-            string currentShopName = Configuration.PreferredCollectableShop.Name ?? "Select a shop";
+            string currentShopName = Configuration.PreferredCollectableShop.Name ?? "请选择地点";
 
             ImGui.Spacing();
             if (ImGui.BeginCombo("##shopselection", currentShopName))
@@ -212,7 +212,7 @@ public class ConfigWindow : Window, IDisposable
                 {
                     ImGui.BeginDisabled(CollectableNpcLocations.CollectableShops[i].Disabled || (CollectableNpcLocations.CollectableShops[i].IsLifestreamRequired && !IPCSubscriber_Common.IsReady("Lifestream")));
                     var shop = CollectableNpcLocations.CollectableShops[i];
-                    if (ImGui.Selectable(shop.IsLifestreamRequired && !IPCSubscriber_Common.IsReady("Lifestream") ? (shop.Name + " (Lifestream required)") : shop.Name))
+                    if (ImGui.Selectable(shop.IsLifestreamRequired && !IPCSubscriber_Common.IsReady("Lifestream") ? (shop.Name + "（需要 Lifestream）") : shop.Name))
                     {
                         Configuration.PreferredCollectableShop = CollectableNpcLocations.CollectableShops[i];
                         Configuration.Save();

@@ -47,7 +47,7 @@ namespace TheCollector.CollectableManager;
             var index = turnIn.GetItemIndexOf(itemName);
             if (turnIn.GetItemIndexOf(itemName) == -1)
             {
-                CollectableAutomationHandler.Instance?.ForceStop("Error: Item not found in the current collectable tab.");
+                CollectableAutomationHandler.Instance?.ForceStop("错误：当前收藏品分页未找到该物品。");
                 return;
             }
             var selectItem = stackalloc AtkValue[]
@@ -121,7 +121,7 @@ namespace TheCollector.CollectableManager;
         }
         catch (Exception ex)
         {
-            _log.Error(ex, "Error getting purple scrip count");
+            _log.Error(ex, "获取工票数量时出错");
             return -1;
         }
     }
@@ -195,7 +195,7 @@ namespace TheCollector.CollectableManager;
     }
     catch (Exception ex)
     {
-        _log.Error(ex, "Error getting orange scrip count");
+        _log.Error(ex, "获取工票数量时出错");
         return -1;
     }
 }

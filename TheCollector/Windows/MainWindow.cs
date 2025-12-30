@@ -25,7 +25,7 @@ public class MainWindow : Window, IDisposable
     private ScripShopItem? SelectedScripItem = null;
     
     public MainWindow(Plugin plugin, IDalamudPluginInterface pluginInterface, PlogonLog log)
-        : base("The Collector##CollectorMain", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
+        : base("收藏品助手##CollectorMain", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
     {
         SizeConstraints = new WindowSizeConstraints
         {
@@ -46,15 +46,15 @@ public class MainWindow : Window, IDisposable
     {
         if (ScripShopItemManager.IsLoading)
         {
-            ImGui.Text("Loading items...");
+            ImGui.Text("正在加载物品...");
             return;
         }
-        ImGui.Text("Add Item...");
+        ImGui.Text("添加物品...");
         
         ImGui.PushItemWidth(-ImGui.GetFrameHeightWithSpacing() * 2);
-        if (ImGui.BeginCombo("##ItemCombo", SelectedScripItem?.Name ?? "Select"))
+        if (ImGui.BeginCombo("##ItemCombo", SelectedScripItem?.Name ?? "请选择"))
         {
-            ImGui.InputTextWithHint("##ComboFilter", "Filter...", ref comboFilter, 100);
+            ImGui.InputTextWithHint("##ComboFilter", "筛选...", ref comboFilter, 100);
             ImGui.Separator();
 
             foreach (var item in ScripShopItemManager.ShopItems
@@ -96,7 +96,7 @@ public class MainWindow : Window, IDisposable
         ImGui.Spacing();
 
         
-        ImGui.Text("Items to purchase:");
+        ImGui.Text("待购买物品：");
         ImGui.Spacing();
         for (int i = 0; i < configuration.ItemsToPurchase.Count; i++)
         {
@@ -129,15 +129,15 @@ public class MainWindow : Window, IDisposable
             ImGui.SameLine();
             if (item.Quantity == item.AmountPurchased)
             {
-                ImGui.TextColored(new Vector4(0.0f, 1.0f, 0.0f, 1.0f), "Completed");
+                ImGui.TextColored(new Vector4(0.0f, 1.0f, 0.0f, 1.0f), "已完成");
             }
 
             ImGui.SameLine();
-            float buttonWidth = ImGui.CalcTextSize("Refresh").X + ImGui.GetStyle().FramePadding.X * 2;
+            float buttonWidth = ImGui.CalcTextSize("重置").X + ImGui.GetStyle().FramePadding.X * 2;
             float windowWidth = ImGui.GetWindowContentRegionMax().X;
             float cursorX = windowWidth - buttonWidth;
             ImGui.SetCursorPosX(cursorX);
-            if (ImGui.Button("Refresh"))
+            if (ImGui.Button("重置"))
             {
                 item.ResetQuantity();
                 configuration.Save();

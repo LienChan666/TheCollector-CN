@@ -72,7 +72,7 @@ public sealed class Plugin : IDalamudPlugin
 
         CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
         {
-            HelpMessage = "Opens the main UI. \n/collector config - Opens up the config UI\n/collector collect - Starts turning in collectables."
+            HelpMessage = "打开主界面。\n/collector config - 打开设置界面\n/collector collect - 开始交纳收藏品。"
         });
 
         PluginInterface.UiBuilder.Draw += DrawUI;
@@ -123,7 +123,7 @@ public sealed class Plugin : IDalamudPlugin
                 ToggleConfigUI();
                 break;
             case "stop":
-                _automationHandler.ForceStop("Manually stopped by user");
+                _automationHandler.ForceStop("用户手动停止");
                 break;
             case "buy":
                 ScripShopAutomationHandler.Instance.StartPipeline();

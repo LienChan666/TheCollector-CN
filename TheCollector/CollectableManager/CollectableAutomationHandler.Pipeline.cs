@@ -151,7 +151,7 @@ public partial class CollectableAutomationHandler
         _runner.Start(steps);
     }
 
-    public void StopPipeline() => _runner?.Cancel("Canceled");
+    public void StopPipeline() => _runner?.Cancel("已取消");
 
     private bool _teleportAttempted;
     private StepResult MakeTeleportTick(string shopName)
@@ -171,7 +171,7 @@ public partial class CollectableAutomationHandler
             }
             else
             {
-                return StepResult.Fail("Couldn't find an Aetheryte to teleport to");
+                return StepResult.Fail("未找到可传送的以太之光");
             }
         }
 
@@ -278,7 +278,7 @@ public partial class CollectableAutomationHandler
         if (DateTime.UtcNow < _cooldownUntil) return StepResult.Continue();
 
         var h = TurnInQueue[0];
-        _log.Debug($"found id{h.jobIndex.ToString()} for item {h.name}");
+        _log.Debug($"为物品 {h.name} 找到职业 ID {h.jobIndex}");
         if (_turnInPhase < 2)
         {
             if (h.jobIndex != int.MinValue && _currentJobIndex != h.jobIndex)
@@ -307,7 +307,7 @@ public partial class CollectableAutomationHandler
         {
             6 or 7 => _collectibleWindowHandler.OrangeScripCount(),
             2 or 4 => _collectibleWindowHandler.PurpleScripCount(),
-            _ => throw new InvalidOperationException($"Unknown scrip currency: {h.item.CollectablesShopRewardScrip.Value.Currency}")
+            _ => throw new InvalidOperationException($"未知的工票货币类型：{h.item.CollectablesShopRewardScrip.Value.Currency}")
         };
 
 
@@ -340,8 +340,8 @@ public partial class CollectableAutomationHandler
     {
         if (!HasCollectible)
         {
-            _log.Debug("No collectables found in inventory, cancelling");
-            return StepResult.Fail("No collectables found in inventory, cancelling");
+            _log.Debug("背包中没有收藏品，已取消");
+            return StepResult.Fail("背包中没有收藏品，已取消");
         }
         return StepResult.Success();
     }

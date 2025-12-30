@@ -36,10 +36,10 @@ public static class TeleportHelper
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to find teleportInfo");
+            Logger.Error(ex, "未找到传送信息");
             return false;
         }
-        Logger.Error("Failed to find teleportInfo");
+        Logger.Error("未找到传送信息");
         return false;
     }
 

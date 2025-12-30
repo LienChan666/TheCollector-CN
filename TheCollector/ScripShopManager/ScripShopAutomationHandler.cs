@@ -60,7 +60,7 @@ public partial class ScripShopAutomationHandler
         StopPipeline();
         IsRunning = false;
         Plugin.State = PluginState.Idle;
-        _log.Error(new Exception(reason), "TheCollector has stopped unexpectedly.");
+        _log.Error(new Exception(reason), "未知错误，停止运行。");
         OnError?.Invoke(reason);
     }
 }

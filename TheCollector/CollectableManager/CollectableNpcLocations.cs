@@ -10,7 +10,7 @@ public static class CollectableNpcLocations
     {
         new CollectableShop()
         {
-            Name = "Solution Nine",
+            Name = "九号解决方案",
             Location = new Vector3(-162.17f, 0.9219f, -30.458f),
             ScripShopLocation = new Vector3(-161.84605f, 0.921f, -42.06536f),
             IsLifestreamRequired = true,
@@ -19,12 +19,12 @@ public static class CollectableNpcLocations
         },
         new CollectableShop()
         {
-            Name = "Eulmore",
+            Name = "游末邦",
             Location = new Vector3(16.94f, 82.05f, -19.177f)
         },
         new CollectableShop()
         {
-            Name = "Old Gridania",
+            Name = "格里达尼亚旧街",
             Location = new Vector3(143.62454f, 13.74769f, -105.33799f),
             IsLifestreamRequired = true,
             LifestreamCommand = "Leatherworkers"
